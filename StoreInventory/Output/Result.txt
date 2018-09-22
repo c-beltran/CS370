@@ -1,2 +1,0 @@
-Name 	Price 	OrderNum 	Quantity 
-Toyota 	10000 	5 	11
