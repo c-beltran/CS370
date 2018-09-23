@@ -7,21 +7,28 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class storeStorage {
-	public storeStorage(){
-		
-	}
+	public storeStorage(){}
+	
 	HashMap<Integer, HashMap<String, String>> groceryStore = new HashMap<Integer, HashMap<String, String>>();
 	
 	public void addNewProduct(int id, String name){
 		groceryStore.put(id, new HashMap(){{put("name", name);}});
 	}
 	
-	public String getName(int id){
-		return groceryStore.get(id).get("name");
+	public void setInventoryRecords(int id, String category, String record){
+		groceryStore.get(id).put(category, record);
 	}
 	
 	public void updateProduct(int id, String category, String newUpdate){
 		groceryStore.get(id).put(category, newUpdate);
+	}
+	
+	public String getName(int id){
+		return groceryStore.get(id).get("name");
+	}
+	
+	public String getPrice(int id){
+		return groceryStore.get(id).get("price");
 	}
 }
 

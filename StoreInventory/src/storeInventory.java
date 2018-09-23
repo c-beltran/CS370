@@ -7,21 +7,30 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 /**
  * @author Carlos Alberto
- *This 
+ * 
  */
-public class storeInventory extends storeStorage{
+public class storeInventory extends  viewGUI{
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
 		storeStorage newProduct = new storeStorage();
-		newProduct.addNewProduct(1, "bluetooth");
-		String name = newProduct.getName(1);
+		viewGUI startUI = new viewGUI();
+		startUI.start();
+		newProduct.addNewProduct(0, "bluetooth");
+		
+		String name = newProduct.getName(0);
 		System.out.println(name);
-		newProduct.updateProduct(1, "name", "rayo");
-		name = newProduct.getName(1);
+		newProduct.updateProduct(0, "name", "rayo");
+		name = newProduct.getName(0);
 		System.out.println(name);
+		
+		newProduct.setInventoryRecords(0, "price", "1000");
+		String price = newProduct.getPrice(0);
+		System.out.println(price);
+		
+		
 
 //		HashMap<Integer, HashMap<String, String>> groceryStore = new HashMap<Integer, HashMap<String, String>>();
 		
