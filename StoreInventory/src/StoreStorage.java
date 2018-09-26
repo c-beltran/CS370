@@ -30,5 +30,13 @@ public class StoreStorage {
 	public String getPrice(int id){
 		return groceryStore.get(id).get("price");
 	}
+	
+	public String getQuantity(int id){
+		return groceryStore.get(id).get("quantity");
+	}
+	
+	public String getRemaining(int id){
+		return groceryStore.get(id).get("remaining");
+	}
 }
 

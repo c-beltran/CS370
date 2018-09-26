@@ -18,18 +18,18 @@ public class StoreInventory extends  viewGUI{
 		StoreStorage newProduct = new StoreStorage();
 		viewGUI startUI = new viewGUI();
 		startUI.start();
-		newProduct.addNewProduct(0, "bluetooth");
+//		newProduct.addNewProduct(0, "bluetooth");
 		
-		String name = newProduct.getName(0);
-		System.out.println(name);
-		newProduct.updateProduct(0, "name", "rayo");
-		name = newProduct.getName(0);
-		System.out.println(name);
-		
-		newProduct.setInventoryRecords(0, "price", "1000");
-		String price = newProduct.getPrice(0);
-		System.out.println(price);
-		
+//		String name = newProduct.getName(0);
+//		System.out.println(name);
+//		newProduct.updateProduct(0, "name", "rayo");
+//		name = newProduct.getName(0);
+//		System.out.println(name);
+//		
+//		newProduct.setInventoryRecords(0, "price", "1000");
+//		String price = newProduct.getPrice(0);
+//		System.out.println(price);
+//		
 		
 
 //		HashMap<Integer, HashMap<String, String>> groceryStore = new HashMap<Integer, HashMap<String, String>>();
