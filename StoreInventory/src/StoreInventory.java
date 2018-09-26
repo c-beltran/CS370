@@ -9,13 +9,13 @@ import java.io.OutputStreamWriter;
  * @author Carlos Alberto
  * 
  */
-public class storeInventory extends  viewGUI{
+public class StoreInventory extends  viewGUI{
 	/**
 	 * @param args
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		storeStorage newProduct = new storeStorage();
+		StoreStorage newProduct = new StoreStorage();
 		viewGUI startUI = new viewGUI();
 		startUI.start();
 		newProduct.addNewProduct(0, "bluetooth");

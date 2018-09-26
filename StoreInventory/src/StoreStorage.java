@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class storeStorage {
-	public storeStorage(){}
+public class StoreStorage {
+	public StoreStorage(){}
 	
 	HashMap<Integer, HashMap<String, String>> groceryStore = new HashMap<Integer, HashMap<String, String>>();
 	
