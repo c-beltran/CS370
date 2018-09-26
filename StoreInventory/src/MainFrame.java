@@ -18,10 +18,21 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout());
 				
 		//create swing component
-		JTextArea textArea = new JTextArea();
+		final JTextArea textArea = new JTextArea();
 		
-		//panel that contains the labels and buttons.
+		////////panel that contains the labels and buttons.\\\\\\\
 		detailsPanel = new DetailsPanel();
+		
+		//adding a listener to detailsPanel to respond to event added to detailsPanel
+		detailsPanel.addDetailListener(new DetailListener(){
+			//this will contain the information of that detail event
+			@Override
+			public void detailEventOccurred(DetailEvent event) {
+				String show = event.getText();
+				
+				textArea.append(show);
+			}
+		});
 		
 		//add swing components to content pane
 		Container con = getContentPane();

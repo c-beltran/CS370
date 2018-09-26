@@ -9,10 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.EventListenerList;
 
 public class DetailsPanel extends JPanel {
 	
 	StoreStorage newProduct = new StoreStorage();
+	
+	//java event listener list class is for creating a list of events
+	private EventListenerList listenerList = new EventListenerList();
 	
 	public DetailsPanel() {
 		//set the dimensions of the panel
@@ -55,10 +59,17 @@ public class DetailsPanel extends JPanel {
 				newProduct.setInventoryRecords(prodId, "quantity", quantity);
 				newProduct.setInventoryRecords(prodId, "remaining", remaining);
 				
+				
 				String named = newProduct.getName(prodId);
 				String priced = newProduct.getPrice(prodId);
 				String quan = newProduct.getQuantity(prodId);
 				String re = newProduct.getRemaining(prodId);
+				
+				String show = "you added " + named;
+				
+				//firing
+				fireDetailEvent(new DetailEvent(this, show));
+				
 				System.out.println(named);
 				System.out.println(priced);
 				System.out.println(quan);
@@ -136,5 +147,23 @@ public class DetailsPanel extends JPanel {
 //		gc.gridy = 1;
 //		add(addPrdIdBtn, gc);
 
+	}
+	
+	public void fireDetailEvent(DetailEvent event){
+		Object[] listeners = listenerList.getListenerList();
+		
+		for(int i=0; i < listeners.length; i+=2){
+			if(listeners[i] == DetailListener.class){
+				((DetailListener)listeners[i+1]).detailEventOccurred(event);
+			}
+		}
+	}
+	
+	public void addDetailListener(DetailListener listener){
+		listenerList.add(DetailListener.class, listener);
+	}
+	
+	public void removeDetailListener(DetailListener listener){
+		listenerList.remove(DetailListener.class, listener);
 	}
 }
