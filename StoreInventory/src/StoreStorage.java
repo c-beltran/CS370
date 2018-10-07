@@ -7,7 +7,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class StoreStorage {
-	public StoreStorage(){}
+	private static StoreStorage product = null;
+	public static StoreStorage getProdDB(){
+		if(product == null){
+			product = new StoreStorage();
+		}
+		return product;
+	}
 	
 	HashMap<Integer, HashMap<String, String>> groceryStore = new HashMap<Integer, HashMap<String, String>>();
 	
@@ -37,6 +43,10 @@ public class StoreStorage {
 	
 	public String getRemaining(int id){
 		return groceryStore.get(id).get("remaining");
+	}
+	
+	public Object getKeys(){
+		return groceryStore.keySet();
 	}
 }
 

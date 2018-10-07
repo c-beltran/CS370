@@ -1,0 +1,41 @@
+import java.awt.BorderLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+public class EditGUI extends JFrame {
+	
+	private DetailsPanel detailsPanel;
+
+	public EditGUI() {
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			public void run() {
+				JFrame frame = new JFrame("Edit Product Details");
+				frame.setSize(300, 200);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
+				
+				//set layout manager
+				setLayout(new BorderLayout());
+				
+				//Labels to put text
+				JLabel prodIdLabel = new JLabel("Product Id: ");
+				JLabel prodCategoryLabel = new JLabel("Category: ");
+				JLabel prodUpdateLabel = new JLabel("Update: ");
+				
+				final JTextField prodIdField = new JTextField(10);
+				final JTextField prodCategoryField = new JTextField(10);
+				final JTextField prodUpdateField = new JTextField(10);
+				
+				//button to add
+				JButton addProdBtn = new JButton("Edit Product");
+			}
+		});
+	}
+}
