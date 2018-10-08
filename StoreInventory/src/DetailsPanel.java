@@ -25,7 +25,7 @@ public class DetailsPanel extends JPanel {
 		setPreferredSize(size);
 		
 		//set a border around it
-		setBorder(BorderFactory.createTitledBorder("Add Product Details"));
+		setBorder(BorderFactory.createTitledBorder("Add Product"));
 		
 		//Labels to put text
 		JLabel nameLabel = new JLabel("Name: ");

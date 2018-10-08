@@ -26,8 +26,7 @@ public class MainEditFrame extends JFrame{
 		
 		//add swing components to content pane
 		Container con = getContentPane();
-				
-		con.add(editDetailsPanel, BorderLayout.WEST);
+		con.add(editDetailsPanel);		
 	}
 
 }

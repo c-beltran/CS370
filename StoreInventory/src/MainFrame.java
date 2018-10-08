@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
 				
 				System.out.println("--test-- "+show);
 				
-				textArea.append("hello");
+				textArea.append(show);
 			}
 			
 		});
@@ -59,8 +59,8 @@ public class MainFrame extends JFrame {
 		
 		con.add(textArea, BorderLayout.CENTER);
 		con.add(detailsPanel, BorderLayout.WEST);
-		
-//		con.add(editDetailsPanel, BorderLayout.WEST);
+//		con.add(editDetailsPanel);	
+		con.add(editDetailsPanel, BorderLayout.SOUTH);
 				
 	}
 

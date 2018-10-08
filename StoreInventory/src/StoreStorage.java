@@ -29,6 +29,10 @@ public class StoreStorage {
 		groceryStore.get(id).put(category, newUpdate);
 	}
 	
+	public void removeProduct(int id){
+		groceryStore.remove(id);
+	}
+	
 	public String getName(int id){
 		return groceryStore.get(id).get("name");
 	}

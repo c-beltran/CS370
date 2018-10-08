@@ -11,7 +11,7 @@ public class EditGUI{
 			
 			public void run() {
 				JFrame editFrame = new MainEditFrame("Edit Product Details");
-				editFrame.setSize(215, 200);
+				editFrame.setSize(300, 300);
 				editFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				editFrame.setVisible(true);
 			}

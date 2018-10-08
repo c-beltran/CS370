@@ -8,7 +8,7 @@ public class viewGUI {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				JFrame frame = new MainFrame("Store Inventory App");
-				frame.setSize(500, 400);
+				frame.setSize(1200,800);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}

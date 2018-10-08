@@ -20,22 +20,34 @@ public class EditDetailsPane extends JPanel {
 	public EditDetailsPane(){
 		
 		//set a border around it
-		setBorder(BorderFactory.createTitledBorder("Add Product Details"));
+		setBorder(BorderFactory.createTitledBorder("Edit/Remove Products"));
 
 		//set layout manager
 		setLayout(new BorderLayout());
 		
-		//Labels to put text
+		//Labels for product update
 		JLabel prodIdLabel = new JLabel("Product Id: ");
 		JLabel prodCategoryLabel = new JLabel("Category: ");
 		JLabel prodUpdateLabel = new JLabel("Update: ");
 		
+		//textfields for product update
 		final JTextField prodIdField = new JTextField(10);
 		final JTextField prodCategoryField = new JTextField(10);
 		final JTextField prodUpdateField = new JTextField(10);
 		
+		//labels for product removal
+		JLabel remIdLabel = new JLabel("Product Id: ");
+		JLabel remCategoryLabel = new JLabel("Category: ");
+		JLabel remProdLabel = new JLabel("Remove: ");
+		
+		//textfield for product removal
+		final JTextField remIdField = new JTextField(10);
+		final JTextField remCategoryField = new JTextField(10);
+		final JTextField removeProdField = new JTextField(10);
+		
 		//button to add
-		JButton updateProdBtn = new JButton("Update Product");
+		JButton updateProdBtn = new JButton("UPDATE PRODUCT");
+		JButton removeProdBtn = new JButton("REMOVE PRODUCT");
 		
 		//set the lay out
 		setLayout(new GridBagLayout());
@@ -117,13 +129,37 @@ public class EditDetailsPane extends JPanel {
 		gc.gridy = 2;
 		add(prodUpdateField, gc);
 		
-		//LAST ROW//
+		//LAST ROW OF SECOND COLUMN//
 		gc.weighty = 10;
 		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		gc.gridx = 1;
 		gc.gridy = 3;
 		//add product button
 		add(updateProdBtn, gc);
+		
+		//THIRD COLUMN FOR REMOVE//
+		gc.anchor = GridBagConstraints.LINE_END; //Aligns right
+		gc.gridx = 4;
+		gc.gridy = 0;
+		add(remIdLabel, gc);
+		
+		gc.gridx =4;
+		gc.gridy = 1; //goes to next row down
+		add(remProdLabel, gc);
+		
+		//FIFTH COLUMN FOR REMOVE
+		gc.anchor = GridBagConstraints.LINE_START; //Aligns left
+		gc.gridx = 5;
+		gc.gridy = 0;
+		add(remIdField, gc);
+		
+		//LAST ROW OF THIRD COLUMN//
+		gc.weighty = 10;
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		gc.gridx = 5;
+		gc.gridy = 1;
+		//add product button
+		add(removeProdBtn, gc);
 	}
 	
 	public void fireDetailEvent(DetailEvent event){
