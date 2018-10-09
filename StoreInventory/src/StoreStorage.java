@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.security.KeyStore.Entry;
 public class StoreStorage {
 	
 	private static StoreStorage product = null;
+	private Scanner seed;
 	
 	public static StoreStorage getProdDB(){
 		if(product == null){
@@ -53,14 +55,15 @@ public class StoreStorage {
 		return groceryStore.get(id).get("remaining");
 	}
 	
-	public void getKeys() throws IOException {
+	//PRINT TO A TEXT FILE FUNC
+	public void printToTextFile() throws IOException {
 		String name = null, price = null, quantity = null, remaining = null;
 		int prodId;
 		
 		File fout = new File("Result"+".txt");
 		FileOutputStream fos = new FileOutputStream(fout);
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-		bw.write(String.format( "%-15s%-15s%-15s%-15s%-15s\n", "prodID", "Name", "Price", "quantity", "Quantity"));
+		bw.write(String.format( "%-15s%-15s%-15s%-15s%-15s\n", "prodID", "Name", "Price", "Quantity", "Remaining"));
 		
 		Set<java.util.Map.Entry<Integer, HashMap<String, String>>> hashSet = groceryStore.entrySet();
         for(java.util.Map.Entry<Integer, HashMap<String, String>> entry:hashSet ) {
@@ -78,8 +81,38 @@ public class StoreStorage {
         }
         
 		bw.close();
-	}
+	}//END
 	
+	public int initSeedsTextFile(int count){
+		try{
+			seed = new Scanner(new File("seed.txt"));
+		}
+		catch(Exception err){
+			System.out.println("could not find file");
+		}
+		
+		while(seed.hasNext()){
+			String id = seed.next();
+			String name = seed.next();
+			String price = seed.next();
+			String quantity = seed.next();
+			String remaining = seed.next();
+			
+			int prodId = Integer.parseInt(id);
+			
+			addNewProduct(prodId, name);
+			setInventoryRecords(prodId, "prodId", id);
+			setInventoryRecords(prodId, "price", price);
+			setInventoryRecords(prodId, "quantity", quantity);
+			setInventoryRecords(prodId, "remaining", remaining);
+			
+			count++;
+		}
+		
+		seed.close();
+		
+		return count;
+	}
 
 	public Object entrySet() {
 		return groceryStore.entrySet();

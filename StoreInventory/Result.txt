@@ -1,2 +1,7 @@
-prodID         Name           Price          quantity       Quantity       
-1              carlos         5              8              5              
+prodID         Name           Price          Quantity       Remaining      
+1              light          80.00          2              2              
+1000           carlos         500.00         10             5              
+1001           iPhone         899.00         15             7              
+1002           Head_Phones    80.00          20             3              
+1003           MacBook        2500.00        25             25             
+1004           Video_Game     250.00         10             10             

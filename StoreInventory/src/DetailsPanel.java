@@ -49,6 +49,7 @@ public class DetailsPanel extends JPanel {
 		
 		/*this function adds a product to the db*/
 		addProdBtn.addActionListener(new ActionListener(){
+			
 			public void actionPerformed(ActionEvent e){
 				String name = nameField.getText();
 				String prodIdString = prodIdField.getText();
@@ -87,7 +88,7 @@ public class DetailsPanel extends JPanel {
 			public void actionPerformed(ActionEvent e){
 			
 				try {
-					newProduct.getKeys();
+					newProduct.printToTextFile();
 				} catch (IOException err) {
 					// TODO Auto-generated catch block
 					err.printStackTrace();
@@ -99,6 +100,21 @@ public class DetailsPanel extends JPanel {
 				
 				System.out.println(show);
 			}
+		});//end of printProdBtn
+		
+		fileProdBtn.addActionListener(new ActionListener(){
+
+			
+			public void actionPerformed(ActionEvent e) {
+				int count = 0;
+				
+				count = newProduct.initSeedsTextFile(count);
+				
+				String show = "Seed File Initiated...." + count + " Records were Added! \n" + "\n";
+				
+				fireDetailEvent(new DetailEvent(this, show));
+			}
+			
 		});
 				
 		//set the lay out
@@ -194,11 +210,7 @@ public class DetailsPanel extends JPanel {
 		listenerList.add(DetailListener.class, listener);
 	}
 	
-//	public void removeDetailListener(DetailListener listener){
-//		listenerList.remove(DetailListener.class, listener);
-//	}
-	
-	public void fileDetailListener(DetailListener listener){
+	public void seedDetailListener(DetailListener listener){
 		listenerList.add(DetailListener.class, listener);
 	}
 	
