@@ -60,13 +60,13 @@ public class StoreInventory extends  viewGUI{
 		
 	}
 	
-	public static void print(String n, String p, String o, String q) throws IOException{
-		File fout = new File("Result"+".txt");
-		FileOutputStream fos = new FileOutputStream(fout);
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-		bw.write(String.format( "%-15s%-15s%-15s%-15s\n", "Name", "Price", "OrderNum", "Quantity"));
-		bw.write(String.format( "%-15s%-15s%-15s%-15s\n", n, p, o, q));
-		bw.close();
-	}
+//	public static void print(String n, String p, String o, String q) throws IOException{
+//		File fout = new File("Result"+".txt");
+//		FileOutputStream fos = new FileOutputStream(fout);
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+//		bw.write(String.format( "%-15s%-15s%-15s%-15s\n", "Name", "Price", "OrderNum", "Quantity"));
+//		bw.write(String.format( "%-15s%-15s%-15s%-15s\n", n, p, o, q));
+//		bw.close();
+//	}
 
 }

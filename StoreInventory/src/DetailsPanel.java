@@ -3,6 +3,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -42,8 +44,8 @@ public class DetailsPanel extends JPanel {
 		
 		//button to add
 		JButton addProdBtn = new JButton("Add Product");
-		JButton editProdBtn = new JButton("Edit Product");
-		JButton remProdBtn = new JButton("Remove Product");
+		JButton printProdBtn = new JButton("Print");
+		JButton fileProdBtn = new JButton("File Upload");
 		
 		/*this function adds a product to the db*/
 		addProdBtn.addActionListener(new ActionListener(){
@@ -68,7 +70,7 @@ public class DetailsPanel extends JPanel {
 				String quan = newProduct.getQuantity(prodId);
 				String re = newProduct.getRemaining(prodId);
 				
-				String show = "THE FOLLOWING PRODUCT WAS ADDED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n";
+				String show = "THE FOLLOWING PRODUCT WAS ADDED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n" + "\n";
 				
 				//firing
 				fireDetailEvent(new DetailEvent(this, show));
@@ -80,10 +82,22 @@ public class DetailsPanel extends JPanel {
 			}
 		});//end of addProdBtn
 		
-		editProdBtn.addActionListener(new ActionListener(){
+		printProdBtn.addActionListener(new ActionListener(){
+			
 			public void actionPerformed(ActionEvent e){
-				EditGUI newEditGui = new EditGUI();
-				newEditGui.start();
+			
+				try {
+					newProduct.getKeys();
+				} catch (IOException err) {
+					// TODO Auto-generated catch block
+					err.printStackTrace();
+				}
+				
+				String show = "ALL PRODUCTS WERE PRINTED TO 'Result.txt' FILE \n" + "\n";
+				
+				fireDetailEvent(new DetailEvent(this, show));
+				
+				System.out.println(show);
 			}
 		});
 				
@@ -154,15 +168,15 @@ public class DetailsPanel extends JPanel {
 		//add product button
 		add(addProdBtn, gc);
 		
-		//edit button
+		//print button
 		gc.gridx = 0;
 		gc.gridy = 10;
-		add(editProdBtn, gc);
+		add(printProdBtn, gc);
 		
-		//remove button
+		//file upload button
 		gc.gridx = 1;
 		gc.gridy = 10;
-		add(remProdBtn, gc);
+		add(fileProdBtn, gc);
 
 	}
 	
@@ -180,11 +194,15 @@ public class DetailsPanel extends JPanel {
 		listenerList.add(DetailListener.class, listener);
 	}
 	
-//	public void editDetailListener(DetailListener listener){
-//		listenerList.add(DetailListener.class, listener);
+//	public void removeDetailListener(DetailListener listener){
+//		listenerList.remove(DetailListener.class, listener);
 //	}
 	
-	public void removeDetailListener(DetailListener listener){
+	public void fileDetailListener(DetailListener listener){
+		listenerList.add(DetailListener.class, listener);
+	}
+	
+	public void printDetailListener(DetailListener listener){
 		listenerList.remove(DetailListener.class, listener);
 	}
 }

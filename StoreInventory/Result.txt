@@ -1,2 +1,2 @@
-Name           Price          OrderNum       Quantity       
-Toyota         10000          5              11             
+prodID         Name           Price          quantity       Quantity       
+1              carlos         5              8              5              

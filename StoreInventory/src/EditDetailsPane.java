@@ -36,7 +36,7 @@ public class EditDetailsPane extends JPanel {
 		final JTextField prodUpdateField = new JTextField(10);
 		
 		//labels for product removal
-		JLabel remIdLabel = new JLabel("Product Id: ");
+		JLabel remIdLabel = new JLabel("Product Id to be removed: ");
 		JLabel remCategoryLabel = new JLabel("Category: ");
 		JLabel remProdLabel = new JLabel("Remove: ");
 		
@@ -51,11 +51,13 @@ public class EditDetailsPane extends JPanel {
 		
 		//set the lay out
 		setLayout(new GridBagLayout());
+		
 		//GridBagConstraints is a class where you specify where you want each control to go
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		/*this function adds a product to the db*/
 		updateProdBtn.addActionListener(new ActionListener(){
+			
 			public void actionPerformed(ActionEvent e){
 				String prodIdString = prodIdField.getText();
 				int prodId = Integer.parseInt(prodIdString);
@@ -77,7 +79,7 @@ public class EditDetailsPane extends JPanel {
 				String quan = editProduct.getQuantity(prodId);
 				String re = editProduct.getRemaining(prodId);
 				
-				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n";
+				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n" + "\n";
 				
 				System.out.println("PRINT SHOW: " + show + "\n");
 				
@@ -91,6 +93,29 @@ public class EditDetailsPane extends JPanel {
 				System.out.println(re);
 			}
 		});//end of addProdBtn
+		
+		removeProdBtn.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String remIdString = prodIdField.getText();
+				int prodId = Integer.parseInt(remIdString);
+				
+				//testing
+				String named = editProduct.getName(prodId);
+				String priced = editProduct.getPrice(prodId);
+				String quan = editProduct.getQuantity(prodId);
+				String re = editProduct.getRemaining(prodId);
+				
+				String show = "THE FOLLOWING PRODUCT WAS REMOVED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n" + "\n";
+				
+				editProduct.removeProduct(prodId);
+				
+				fireDetailEvent(new DetailEvent(this, show));
+			}
+			
+		});
 		
 		//========SETTING UP CONTROLS=====//
 		
@@ -143,10 +168,6 @@ public class EditDetailsPane extends JPanel {
 		gc.gridy = 0;
 		add(remIdLabel, gc);
 		
-		gc.gridx =4;
-		gc.gridy = 1; //goes to next row down
-		add(remProdLabel, gc);
-		
 		//FIFTH COLUMN FOR REMOVE
 		gc.anchor = GridBagConstraints.LINE_START; //Aligns left
 		gc.gridx = 5;
@@ -174,5 +195,9 @@ public class EditDetailsPane extends JPanel {
 	
 	public void editDetailListener(DetailListener listener){
 		listenerList.add(DetailListener.class, listener);
+	}
+	
+	public void removeDetailListener(DetailListener listener){
+		listenerList.remove(DetailListener.class, listener);
 	}
 }
