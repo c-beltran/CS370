@@ -8,6 +8,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * @author Carlos Alberto
+ *Utility class which contains
+ *methods used in the flag implementation
+ */
 public class Utility extends JFrame {
 	
     private static JButton button = new JButton("Open");
@@ -16,6 +21,10 @@ public class Utility extends JFrame {
 
     StoreStorage storage = StoreStorage.getProdDB();
     
+    /**
+     * starts a file chooser GUI
+     * @startJFile
+     */
     public void startJFile() {
         add(button);
         setSize(400, 200);
@@ -48,9 +57,16 @@ public class Utility extends JFrame {
         
         /* Running the Application */
         new Utility();
-	}
+	}//end of startJFile
     
-public String initCMD(String input){
+    /**
+     * takes an input from the -i
+     * input from command line
+     * and seeds the storage structure
+     * @param input
+     * @return
+     */
+    public String initCMD(String input){
 		
 		int count = 0;
 		String totalCount;
@@ -84,6 +100,6 @@ public String initCMD(String input){
 		totalCount = Integer.toString(count);
 		
 		return totalCount;
-	}
+	}//end of initCMD
 
 }

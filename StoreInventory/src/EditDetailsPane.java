@@ -13,7 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
-
+/**
+ * @author Carlos Alberto
+ *Contains important functions of GUI
+ *such as edit and remove upload 
+ *functionalities
+ */
 public class EditDetailsPane extends JPanel {
 
 	StoreStorage editProduct = StoreStorage.getProdDB();
@@ -64,14 +69,7 @@ public class EditDetailsPane extends JPanel {
 				String category = prodCategoryField.getText();
 				String updatedContent = prodUpdateField.getText();
 				
-				String getname = editProduct.getName(prodId);
-				System.out.println("GETTING NAME: " + getname);
-				System.out.println(prodId + " " + category + " " + updatedContent);
-				
 				editProduct.updateProduct(prodId, category, updatedContent);
-				
-				getname = editProduct.getName(prodId);
-				System.out.println("NEW NAME IS: " + getname);
 				
 				//testing
 				String named = editProduct.getName(prodId);
@@ -82,17 +80,10 @@ public class EditDetailsPane extends JPanel {
 				String time = timeStamp();
 				
 				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
-				
-				System.out.println("PRINT SHOW: " + show + "\n");
-				
+								
 				//firing
 				fireDetailEvent(new DetailEvent(this, show));
 
-				//testing output
-				System.out.println(named);
-				System.out.println(priced);
-				System.out.println(quan);
-				System.out.println(re);
 			}
 		});//end of addProdBtn
 		
@@ -191,7 +182,7 @@ public class EditDetailsPane extends JPanel {
 		Date dnt = new Date(); 
 	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd 'at' hh:mm:ss a zzz");
 	    return ft.format(dnt);
-	}
+	}//end of timeStamp
 	
 	public void fireDetailEvent(DetailEvent event){
 		Object[] listeners = listenerList.getListenerList();
@@ -201,13 +192,13 @@ public class EditDetailsPane extends JPanel {
 				((DetailListener)listeners[i+1]).detailEventOccurred(event);
 			}
 		}
-	}
+	}//end of fireDetailEvent
 	
 	public void editDetailListener(DetailListener listener){
 		listenerList.add(DetailListener.class, listener);
-	}
+	}//end of editDetailListener
 	
 	public void removeDetailListener(DetailListener listener){
 		listenerList.remove(DetailListener.class, listener);
-	}
+	}//end of removeDetailListener
 }

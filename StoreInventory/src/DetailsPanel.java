@@ -18,6 +18,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 
+/**
+ * @author Carlos Alberto
+ *Contains important functions of GUI
+ *such as add, print and file upload 
+ *functionalities
+ */
 public class DetailsPanel extends JPanel {
 	
 	StoreStorage newProduct = StoreStorage.getProdDB();
@@ -89,11 +95,7 @@ public class DetailsPanel extends JPanel {
 				
 				//firing
 				fireDetailEvent(new DetailEvent(this, show));
-				//testing output
-				System.out.println(named);
-				System.out.println(priced);
-				System.out.println(quan);
-				System.out.println(re);
+
 			}
 		});//end of addProdBtn
 		
@@ -130,8 +132,7 @@ public class DetailsPanel extends JPanel {
 				
 				fireDetailEvent(new DetailEvent(this, show));
 			}
-			
-		});
+		});//end of listener
 				
 		//set the lay out
 		setLayout(new GridBagLayout()); //GridBagLayout lets you add conjunctions with constraints
@@ -226,13 +227,13 @@ public class DetailsPanel extends JPanel {
 		
 		return count;
 		
-	} // openFile
+	} //end of openFile
 	
 	private String timeStamp() {
 		Date dnt = new Date(); 
 	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd 'at' hh:mm:ss a zzz");
 	    return ft.format(dnt);
-	}
+	}//end of timeStamp
 	
 	public void fireDetailEvent(DetailEvent event){
 		Object[] listeners = listenerList.getListenerList();
@@ -242,17 +243,18 @@ public class DetailsPanel extends JPanel {
 				((DetailListener)listeners[i+1]).detailEventOccurred(event);
 			}
 		}
-	}
+	}//end of fireDetailEvent
 	
 	public void addDetailListener(DetailListener listener){
 		listenerList.add(DetailListener.class, listener);
-	}
+	}//end of addDetailListener
 	
 	public void seedDetailListener(DetailListener listener){
 		listenerList.add(DetailListener.class, listener);
-	}
+	}//end of seedDetailListener
 	
 	public void printDetailListener(DetailListener listener){
 		listenerList.remove(DetailListener.class, listener);
-	}
-}
+	}//end of printDetailListener
+	
+}//end of DetailsPanel

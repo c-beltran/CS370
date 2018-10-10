@@ -11,8 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-/*
- * This class acts as the controller which listens and tells the objects what to do
+/**
+ * @author Carlos Alberto
+ * This class acts as the controller
+ * which listens and tells the objects what to do
  */
 
 public class MainFrame extends JFrame {
@@ -29,9 +31,6 @@ public class MainFrame extends JFrame {
 		//create swing component
 		final JTextArea textArea = new JTextArea(10, 10);
 		
-//		JScrollPane scroll = new JScrollPane (textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		getContentPane().add(scroll);
-
 		////////panel that contains the labels and buttons.\\\\\\\
 		detailsPanel = new DetailsPanel();
 		editDetailsPanel = new EditDetailsPane();
@@ -55,7 +54,7 @@ public class MainFrame extends JFrame {
 				
 				textArea.append(show);
 			}
-		});
+		});//end of listener
 		
 		editDetailsPanel.editDetailListener(new DetailListener(){
 
@@ -65,8 +64,7 @@ public class MainFrame extends JFrame {
 								
 				textArea.append(show);
 			}
-			
-		});
+		});//end of listener
 		
 		editDetailsPanel.removeDetailListener(new DetailListener(){
 
@@ -76,8 +74,7 @@ public class MainFrame extends JFrame {
 						
 				textArea.append(show);
 			}
-			
-		});
+		});//end of listener
 		
 		//add swing components to content pane
 		Container con = getContentPane();

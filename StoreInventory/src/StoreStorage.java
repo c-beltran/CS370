@@ -10,8 +10,8 @@ import java.io.OutputStreamWriter;
 import java.security.KeyStore.Entry;
 
 /**
- * 
  * @author Carlos Alberto
+ * 
  *This contains the storage structure
  *is made out of a nested HashMap.
  *In addition this contains various methods

@@ -5,11 +5,17 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 
+/**
+ * @author Carlos Alberto
+ *This is the main GUI class
+ *which sets the layout
+ */
 public class viewGUI {
 	public viewGUI(){}
 	
 	/**
-	 * @wbp.parser.entryPoint
+	 *Initiates the main GUI
+	 *@start 
 	 */
 	public void start(){
 		SwingUtilities.invokeLater(new Runnable() {
@@ -20,5 +26,5 @@ public class viewGUI {
 				frame.setVisible(true);
 			}
 		});
-	}
+	}//end of start
 }

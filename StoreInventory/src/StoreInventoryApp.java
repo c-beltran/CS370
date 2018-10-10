@@ -14,7 +14,8 @@ import java.io.OutputStreamWriter;
  * which is in charge of running both
  * the Flag inputs and GUI
  */
-public class InventoryApp extends  viewGUI{
+public class StoreInventoryApp extends  viewGUI{
+	
 	/**
 	 * @param args
 	 * @throws IOException
