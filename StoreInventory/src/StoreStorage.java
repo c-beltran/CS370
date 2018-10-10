@@ -9,6 +9,14 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.security.KeyStore.Entry;
 
+/**
+ * 
+ * @author Carlos Alberto
+ *This contains the storage structure
+ *is made out of a nested HashMap.
+ *In addition this contains various methods
+ *for querying the data
+ */
 public class StoreStorage {
 	
 	private static StoreStorage product = null;
@@ -55,7 +63,13 @@ public class StoreStorage {
 		return groceryStore.get(id).get("remaining");
 	}
 	
-	//PRINT TO A TEXT FILE FUNC
+	/**
+	 * Function is used to print a .txt file
+	 * it outputs a 'Result.txt' file to the
+	 * current directory
+	 * @throws IOException
+	 * 
+	 */
 	public void printToTextFile() throws IOException {
 		String name = null, price = null, quantity = null, remaining = null;
 		int prodId;
@@ -75,17 +89,14 @@ public class StoreStorage {
         	remaining = groceryStore.get(prodId).get("remaining");
         	
         	bw.write(String.format("%-15s%-15s%-15s%-15s%-15s\n", prodId, name, price, quantity, remaining));
-        	
-            System.out.println("Key=" + entry.getKey()+", Value="+entry.getValue());
-            System.out.println("printing name: " + name);
         }
         
 		bw.close();
 	}//END
 	
-	public int initSeedsTextFile(int count){
+	public int initSeedsTextFile(int count, File uploadFile){
 		try{
-			seed = new Scanner(new File("seed.txt"));
+			seed = new Scanner(uploadFile);
 		}
 		catch(Exception err){
 			System.out.println("could not find file");
@@ -108,14 +119,9 @@ public class StoreStorage {
 			
 			count++;
 		}
-		
 		seed.close();
-		
 		return count;
 	}
-
-	public Object entrySet() {
-		return groceryStore.entrySet();
-	}
+	
 }
 

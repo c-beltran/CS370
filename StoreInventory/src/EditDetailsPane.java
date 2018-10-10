@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -37,9 +39,7 @@ public class EditDetailsPane extends JPanel {
 		
 		//labels for product removal
 		JLabel remIdLabel = new JLabel("Product Id to be removed: ");
-		JLabel remCategoryLabel = new JLabel("Category: ");
-		JLabel remProdLabel = new JLabel("Remove: ");
-		
+
 		//textfield for product removal
 		final JTextField remIdField = new JTextField(10);
 		final JTextField remCategoryField = new JTextField(10);
@@ -79,7 +79,9 @@ public class EditDetailsPane extends JPanel {
 				String quan = editProduct.getQuantity(prodId);
 				String re = editProduct.getRemaining(prodId);
 				
-				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n" + "\n";
+				String time = timeStamp();
+				
+				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 				
 				System.out.println("PRINT SHOW: " + show + "\n");
 				
@@ -108,7 +110,9 @@ public class EditDetailsPane extends JPanel {
 				String quan = editProduct.getQuantity(prodId);
 				String re = editProduct.getRemaining(prodId);
 				
-				String show = "THE FOLLOWING PRODUCT WAS REMOVED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n" + "\n";
+				String time = timeStamp();
+				
+				String show = "THE FOLLOWING PRODUCT WAS REMOVED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 				
 				editProduct.removeProduct(prodId);
 				
@@ -181,6 +185,12 @@ public class EditDetailsPane extends JPanel {
 		gc.gridy = 1;
 		//add product button
 		add(removeProdBtn, gc);
+	}
+	
+	private String timeStamp() {
+		Date dnt = new Date(); 
+	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd 'at' hh:mm:ss a zzz");
+	    return ft.format(dnt);
 	}
 	
 	public void fireDetailEvent(DetailEvent event){

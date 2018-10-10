@@ -3,12 +3,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
@@ -18,8 +23,15 @@ public class DetailsPanel extends JPanel {
 	StoreStorage newProduct = StoreStorage.getProdDB();
 	//java event listener list class is for creating a list of events
 	public EventListenerList listenerList = new EventListenerList();
+	private static JFileChooser fileChooser = new JFileChooser();
 	
 	public DetailsPanel() {
+		
+		/* Enabling Multiple Selection */
+        fileChooser.setMultiSelectionEnabled(true);
+
+        /* Setting Current Directory */
+        fileChooser.setCurrentDirectory(new File("C:\\Documents and Settings"));
 		
 		//set the dimensions of the panel
 		Dimension size = getPreferredSize();
@@ -71,7 +83,9 @@ public class DetailsPanel extends JPanel {
 				String quan = newProduct.getQuantity(prodId);
 				String re = newProduct.getRemaining(prodId);
 				
-				String show = "THE FOLLOWING PRODUCT WAS ADDED \n" + named + "|" + priced + "|" + quan + "|" + re + "\n" + "\n";
+				String time = timeStamp();
+				
+				String show = "THE FOLLOWING PRODUCT WAS ADDED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 				
 				//firing
 				fireDetailEvent(new DetailEvent(this, show));
@@ -94,23 +108,25 @@ public class DetailsPanel extends JPanel {
 					err.printStackTrace();
 				}
 				
-				String show = "ALL PRODUCTS WERE PRINTED TO 'Result.txt' FILE \n" + "\n";
+				String time = timeStamp();
+				
+				String show = "ALL PRODUCTS WERE PRINTED TO 'Result.txt' FILE | " + time + " \n" + "\n";
 				
 				fireDetailEvent(new DetailEvent(this, show));
 				
-				System.out.println(show);
 			}
 		});//end of printProdBtn
 		
 		fileProdBtn.addActionListener(new ActionListener(){
-
 			
 			public void actionPerformed(ActionEvent e) {
 				int count = 0;
 				
-				count = newProduct.initSeedsTextFile(count);
+				String time = timeStamp();
 				
-				String show = "Seed File Initiated...." + count + " Records were Added! \n" + "\n";
+				count = openFile(count);
+				
+				String show = "Seed File Initiated.... " + count + " Records were Added! | " + time + "\n" + "\n";
 				
 				fireDetailEvent(new DetailEvent(this, show));
 			}
@@ -194,6 +210,28 @@ public class DetailsPanel extends JPanel {
 		gc.gridy = 10;
 		add(fileProdBtn, gc);
 
+	}
+	
+	public int openFile(int count) {
+
+		JFileChooser chooser;
+		int status;
+		chooser = new JFileChooser();
+		status = chooser.showOpenDialog(null);
+		if (status == JFileChooser.APPROVE_OPTION)
+			count = newProduct.initSeedsTextFile(count, chooser.getSelectedFile());
+		else{
+			JOptionPane.showMessageDialog(null, "No files were selected");
+		}
+		
+		return count;
+		
+	} // openFile
+	
+	private String timeStamp() {
+		Date dnt = new Date(); 
+	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd 'at' hh:mm:ss a zzz");
+	    return ft.format(dnt);
 	}
 	
 	public void fireDetailEvent(DetailEvent event){
