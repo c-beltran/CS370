@@ -24,15 +24,17 @@ public class StoreInventoryApp extends  viewGUI{
 	 */
 	public static void main(String[] args) throws java.io.IOException {
 		
-		Utility util = new Utility();
-		StoreStorage initDB = StoreStorage.getProdDB();
-		viewGUI startUI = new viewGUI();
-	 
+		Utility Util = new Utility();
+		StoreStorage InitDB = StoreStorage.getProdDB();
+		viewGUI StartUI = new viewGUI();
+		StartUI.start();
+
 		BufferedReader console = new BufferedReader (new InputStreamReader(System.in));
 		String commandLine;
 		String utility;
 		
 		/**
+		 * -FLAGS-
 		 * This while look runs and checks for specific
 		 * input of the user. Different input will output
 		 * different results.
@@ -52,26 +54,22 @@ public class StoreInventoryApp extends  viewGUI{
 				BufferedReader input = new BufferedReader (new InputStreamReader(System.in));
 				utility = input.readLine();
 				if(utility.equals("")){
-					util.startJFile();
+					Util.startJFile();
 					System.out.println("Java File Chooser was used");
 				}
 				else{
-					String result = util.initCMD(utility);
+					String result = Util.initCMD(utility);
 					System.out.println(utility + " was used and " + result + " products were added");
 				}
 			}
 			else if(commandLine.equals("-o")){
 				try {
-					initDB.printToTextFile();
+					InitDB.printToTextFile();
 				} catch (IOException err) {
 					// TODO Auto-generated catch block
 					err.printStackTrace();
 				}
 				System.out.println("Output file was printed as 'Result.txt' You can find it in your current directory");
-			}
-			else if(commandLine.equals("-s")){
-				startUI.start();
-				System.out.println("Graphical User Interface has started");
 			}
 			else{
 				System.out.println("TERMINATING APPLICATION....\nAPPLICATION ENDED");

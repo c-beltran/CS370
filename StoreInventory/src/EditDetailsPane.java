@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +24,7 @@ public class EditDetailsPane extends JPanel {
 
 	StoreStorage editProduct = StoreStorage.getProdDB();
 	public EventListenerList listenerList = new EventListenerList();
+	Utility Util = new Utility();
 
 	public EditDetailsPane(){
 		
@@ -81,8 +83,16 @@ public class EditDetailsPane extends JPanel {
 				
 				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 								
-				//firing
+				//fire event
 				fireDetailEvent(new DetailEvent(this, show));
+				
+				//update log file
+				try {
+					Util.updateLog(show);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});//end of addProdBtn
@@ -107,7 +117,16 @@ public class EditDetailsPane extends JPanel {
 				
 				editProduct.removeProduct(prodId);
 				
+				//fire event
 				fireDetailEvent(new DetailEvent(this, show));
+				
+				//update log file
+				try {
+					Util.updateLog(show);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			
 		});

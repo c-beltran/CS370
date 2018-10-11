@@ -27,6 +27,8 @@ import javax.swing.event.EventListenerList;
 public class DetailsPanel extends JPanel {
 	
 	StoreStorage newProduct = StoreStorage.getProdDB();
+	Utility Util = new Utility();
+	
 	//java event listener list class is for creating a list of events
 	public EventListenerList listenerList = new EventListenerList();
 	private static JFileChooser fileChooser = new JFileChooser();
@@ -93,7 +95,15 @@ public class DetailsPanel extends JPanel {
 				
 				String show = "THE FOLLOWING PRODUCT WAS ADDED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 				
-				//firing
+				//update log file
+				try {
+					Util.updateLog(show);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//fire event
 				fireDetailEvent(new DetailEvent(this, show));
 
 			}
@@ -114,7 +124,16 @@ public class DetailsPanel extends JPanel {
 				
 				String show = "ALL PRODUCTS WERE PRINTED TO 'Result.txt' FILE | " + time + " \n" + "\n";
 				
+				//fire event
 				fireDetailEvent(new DetailEvent(this, show));
+				
+				//update log file
+				try {
+					Util.updateLog(show);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});//end of printProdBtn
@@ -130,7 +149,16 @@ public class DetailsPanel extends JPanel {
 				
 				String show = "Seed File Initiated.... " + count + " Records were Added! | " + time + "\n" + "\n";
 				
+				//fire event
 				fireDetailEvent(new DetailEvent(this, show));
+				
+				//update log file
+				try {
+					Util.updateLog(show);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});//end of listener
 				

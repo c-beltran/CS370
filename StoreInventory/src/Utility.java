@@ -1,6 +1,11 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -101,5 +106,12 @@ public class Utility extends JFrame {
 		
 		return totalCount;
 	}//end of initCMD
+    
+	public void updateLog(String log) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("outputLog.txt", true));
+	    writer.append(log);
+		    
+	    writer.close();
+	}
 
 }

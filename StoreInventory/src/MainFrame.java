@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
 	private DetailsPanel detailsPanel;
 	private EditDetailsPane editDetailsPanel;
 	
+	
 	public MainFrame(String title) {
 		super(title);
 		
@@ -29,7 +30,7 @@ public class MainFrame extends JFrame {
 		getContentPane().setLayout(new BorderLayout());         
 				
 		//create swing component
-		final JTextArea textArea = new JTextArea(10, 10);
+		final JTextArea textArea = new JTextArea(10, 10);		
 		
 		////////panel that contains the labels and buttons.\\\\\\\
 		detailsPanel = new DetailsPanel();
