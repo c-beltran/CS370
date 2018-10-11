@@ -46,7 +46,7 @@ public class StoreInventoryApp extends  viewGUI{
 			
 			// if the user entered a return, just loop again
 			if (commandLine.equals("")) {
-				System.out.println("Enter one of the following commands: [-i], [-o], [-s]");
+				System.out.println("Enter one of the following commands: [-i], [-o]");
 				continue;
 			}
 			else if(commandLine.equals("-i")){

@@ -22,7 +22,7 @@ import javax.swing.event.EventListenerList;
  */
 public class EditDetailsPane extends JPanel {
 
-	StoreStorage editProduct = StoreStorage.getProdDB();
+	StoreStorage InitDB = StoreStorage.getProdDB();
 	public EventListenerList listenerList = new EventListenerList();
 	Utility Util = new Utility();
 
@@ -71,16 +71,14 @@ public class EditDetailsPane extends JPanel {
 				String category = prodCategoryField.getText();
 				String updatedContent = prodUpdateField.getText();
 				
-				editProduct.updateProduct(prodId, category, updatedContent);
+				InitDB.updateProduct(prodId, category, updatedContent);
 				
-				//testing
-				String named = editProduct.getName(prodId);
-				String priced = editProduct.getPrice(prodId);
-				String quan = editProduct.getQuantity(prodId);
-				String re = editProduct.getRemaining(prodId);
+				String named = InitDB.getName(prodId);
+				String priced = InitDB.getPrice(prodId);
+				String quan = InitDB.getQuantity(prodId);
+				String re = InitDB.getRemaining(prodId);
 				
 				String time = timeStamp();
-				
 				String show = "THE FOLLOWING PRODUCT WAS UPDATED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 								
 				//fire event
@@ -105,17 +103,14 @@ public class EditDetailsPane extends JPanel {
 				String remIdString = prodIdField.getText();
 				int prodId = Integer.parseInt(remIdString);
 				
-				//testing
-				String named = editProduct.getName(prodId);
-				String priced = editProduct.getPrice(prodId);
-				String quan = editProduct.getQuantity(prodId);
-				String re = editProduct.getRemaining(prodId);
-				
+				String named = InitDB.getName(prodId);
+				String priced = InitDB.getPrice(prodId);
+				String quan = InitDB.getQuantity(prodId);
+				String re = InitDB.getRemaining(prodId);
 				String time = timeStamp();
-				
 				String show = "THE FOLLOWING PRODUCT WAS REMOVED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
 				
-				editProduct.removeProduct(prodId);
+				InitDB.removeProduct(prodId);
 				
 				//fire event
 				fireDetailEvent(new DetailEvent(this, show));
@@ -129,7 +124,7 @@ public class EditDetailsPane extends JPanel {
 				}
 			}
 			
-		});
+		});//end of removeProdBtn
 		
 		//========SETTING UP CONTROLS=====//
 		
@@ -220,4 +215,5 @@ public class EditDetailsPane extends JPanel {
 	public void removeDetailListener(DetailListener listener){
 		listenerList.remove(DetailListener.class, listener);
 	}//end of removeDetailListener
-}
+
+}//end of EditDetailsPane class

@@ -26,12 +26,12 @@ import javax.swing.event.EventListenerList;
  */
 public class DetailsPanel extends JPanel {
 	
-	StoreStorage newProduct = StoreStorage.getProdDB();
+	StoreStorage InitDB = StoreStorage.getProdDB();
 	Utility Util = new Utility();
-	
-	//java event listener list class is for creating a list of events
-	public EventListenerList listenerList = new EventListenerList();
 	private static JFileChooser fileChooser = new JFileChooser();
+	
+	//java event listener list class, for creating a list of events
+	public EventListenerList listenerList = new EventListenerList();
 	
 	public DetailsPanel() {
 		
@@ -49,7 +49,7 @@ public class DetailsPanel extends JPanel {
 		//set a border around it
 		setBorder(BorderFactory.createTitledBorder("Add Product"));
 		
-		//Labels to put text
+		//Labels for input text
 		JLabel nameLabel = new JLabel("Name: ");
 		JLabel prodIdLabel = new JLabel("Prod Id: ");
 		JLabel priceLabel = new JLabel("Price: ");
@@ -62,12 +62,12 @@ public class DetailsPanel extends JPanel {
 		final JTextField quantityField = new JTextField(10);
 		final JTextField remainingField = new JTextField(10);
 		
-		//button to add
+		//buttons
 		JButton addProdBtn = new JButton("Add Product");
 		JButton printProdBtn = new JButton("Print");
 		JButton fileProdBtn = new JButton("File Upload");
 		
-		/*this function adds a product to the db*/
+		/**this function adds a product to the db*/
 		addProdBtn.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e){
@@ -79,21 +79,23 @@ public class DetailsPanel extends JPanel {
 				String remaining = remainingField.getText();
 				
 				//adding to hashmap storage
-				newProduct.addNewProduct(prodId, name);
-				newProduct.setInventoryRecords(prodId, "prodId", prodIdString);
-				newProduct.setInventoryRecords(prodId, "price", price);
-				newProduct.setInventoryRecords(prodId, "quantity", quantity);
-				newProduct.setInventoryRecords(prodId, "remaining", remaining);
+				InitDB.addNewProduct(prodId, name);
+				InitDB.setInventoryRecords(prodId, "prodId", prodIdString);
+				InitDB.setInventoryRecords(prodId, "price", price);
+				InitDB.setInventoryRecords(prodId, "quantity", quantity);
+				InitDB.setInventoryRecords(prodId, "remaining", remaining);
 				
 				
-				String named = newProduct.getName(prodId);
-				String priced = newProduct.getPrice(prodId);
-				String quan = newProduct.getQuantity(prodId);
-				String re = newProduct.getRemaining(prodId);
+				String named = InitDB.getName(prodId);
+				String priced = InitDB.getPrice(prodId);
+				String quan = InitDB.getQuantity(prodId);
+				String re = InitDB.getRemaining(prodId);
 				
 				String time = timeStamp();
-				
 				String show = "THE FOLLOWING PRODUCT WAS ADDED \n" + named + "| " + priced + "| " + quan + "| " + re + "| " + time + "\n" + "\n";
+				
+				//fire event
+				fireDetailEvent(new DetailEvent(this, show));
 				
 				//update log file
 				try {
@@ -102,26 +104,24 @@ public class DetailsPanel extends JPanel {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				//fire event
-				fireDetailEvent(new DetailEvent(this, show));
 
 			}
 		});//end of addProdBtn
 		
+		/**this function prints all the products stored in db*/
 		printProdBtn.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e){
-			
+				
+				//calls the print function to create Result.txt
 				try {
-					newProduct.printToTextFile();
+					InitDB.printToTextFile();
 				} catch (IOException err) {
 					// TODO Auto-generated catch block
 					err.printStackTrace();
 				}
 				
 				String time = timeStamp();
-				
 				String show = "ALL PRODUCTS WERE PRINTED TO 'Result.txt' FILE | " + time + " \n" + "\n";
 				
 				//fire event
@@ -142,11 +142,9 @@ public class DetailsPanel extends JPanel {
 			
 			public void actionPerformed(ActionEvent e) {
 				int count = 0;
-				
-				String time = timeStamp();
-				
 				count = openFile(count);
-				
+
+				String time = timeStamp();
 				String show = "Seed File Initiated.... " + count + " Records were Added! | " + time + "\n" + "\n";
 				
 				//fire event
@@ -162,8 +160,9 @@ public class DetailsPanel extends JPanel {
 			}
 		});//end of listener
 				
-		//set the lay out
-		setLayout(new GridBagLayout()); //GridBagLayout lets you add conjunctions with constraints
+		//setting the lay out
+		//GridBagLayout lets you add conjunctions with constraints
+		setLayout(new GridBagLayout()); 
 		
 		//GridBagConstraints is a class where you specify where you want each control to go
 		GridBagConstraints gc = new GridBagConstraints();
@@ -238,21 +237,19 @@ public class DetailsPanel extends JPanel {
 		gc.gridx = 1;
 		gc.gridy = 10;
 		add(fileProdBtn, gc);
-
-	}
+		
+	}//end of DetailsPanel
 	
 	public int openFile(int count) {
-
 		JFileChooser chooser;
 		int status;
 		chooser = new JFileChooser();
 		status = chooser.showOpenDialog(null);
-		if (status == JFileChooser.APPROVE_OPTION)
-			count = newProduct.initSeedsTextFile(count, chooser.getSelectedFile());
-		else{
+		if (status == JFileChooser.APPROVE_OPTION){
+			count = InitDB.initSeedsTextFile(count, chooser.getSelectedFile());
+		}else{
 			JOptionPane.showMessageDialog(null, "No files were selected");
-		}
-		
+		}	
 		return count;
 		
 	} //end of openFile
@@ -285,4 +282,4 @@ public class DetailsPanel extends JPanel {
 		listenerList.remove(DetailListener.class, listener);
 	}//end of printDetailListener
 	
-}//end of DetailsPanel
+}//end of DetailsPanel class

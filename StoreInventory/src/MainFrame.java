@@ -22,7 +22,6 @@ public class MainFrame extends JFrame {
 	private DetailsPanel detailsPanel;
 	private EditDetailsPane editDetailsPanel;
 	
-	
 	public MainFrame(String title) {
 		super(title);
 		
@@ -38,18 +37,18 @@ public class MainFrame extends JFrame {
 		
 		//adding a listener to detailsPanel to respond to event added to detailsPanel
 		detailsPanel.addDetailListener(new DetailListener(){
+			
 			//this will contain the information of that detail event
-			@Override
 			public void detailEventOccurred(DetailEvent event) {
 				String show = event.getText();
 				
 				textArea.append(show);
 			}
-		});
+		});//end of listener
 		
 		detailsPanel.printDetailListener(new DetailListener(){
+			
 			//this will contain the information of that detail event
-			@Override
 			public void detailEventOccurred(DetailEvent event) {
 				String show = event.getText();
 				
@@ -58,8 +57,8 @@ public class MainFrame extends JFrame {
 		});//end of listener
 		
 		editDetailsPanel.editDetailListener(new DetailListener(){
-
-			@Override
+			
+			//this will contain the information of that detail event
 			public void detailEventOccurred(DetailEvent event) {
 				String show = event.getText();
 								
@@ -69,7 +68,7 @@ public class MainFrame extends JFrame {
 		
 		editDetailsPanel.removeDetailListener(new DetailListener(){
 
-			@Override
+			//this will contain the information of that detail event
 			public void detailEventOccurred(DetailEvent event) {
 				String show = event.getText();
 						
@@ -79,7 +78,6 @@ public class MainFrame extends JFrame {
 		
 		//add swing components to content pane
 		Container con = getContentPane();
-
 		con.add(textArea, BorderLayout.CENTER);
 		con.add(detailsPanel, BorderLayout.WEST);
 		con.add(editDetailsPanel, BorderLayout.SOUTH);

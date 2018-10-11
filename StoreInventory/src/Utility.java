@@ -24,7 +24,7 @@ public class Utility extends JFrame {
     private static JFileChooser fileChooser = new JFileChooser();
 	private Scanner seed;
 
-    StoreStorage storage = StoreStorage.getProdDB();
+    StoreStorage InitDB = StoreStorage.getProdDB();
     
     /**
      * starts a file chooser GUI
@@ -38,13 +38,13 @@ public class Utility extends JFrame {
 
         int count = 0;
 
-        /* Enabling Multiple Selection */
+        // Enabling Multiple Selection 
         fileChooser.setMultiSelectionEnabled(true);
 
-        /* Setting Current Directory */
+        // Setting Current Directory 
         fileChooser.setCurrentDirectory(new File("C:\\Documents and Settings"));
 
-        /* Adding action listener to open file */
+        // Adding action listener to open file 
         button.addActionListener(new ActionListener() {
 	
 	        public void actionPerformed(ActionEvent event) {
@@ -53,14 +53,14 @@ public class Utility extends JFrame {
 	    		chooser = new JFileChooser();
 	    		status = chooser.showOpenDialog(null);
 	    		if (status == JFileChooser.APPROVE_OPTION)
-	    			storage.initSeedsTextFile(count, chooser.getSelectedFile());
+	    			InitDB.initSeedsTextFile(count, chooser.getSelectedFile());
 	    		else{
 	    			JOptionPane.showMessageDialog(null, "No files were selected");
 	    		}
 	        }
         });
         
-        /* Running the Application */
+        // Running the Application 
         new Utility();
 	}//end of startJFile
     
@@ -92,11 +92,11 @@ public class Utility extends JFrame {
 			
 			int prodId = Integer.parseInt(id);
 			
-			storage.addNewProduct(prodId, name);
-			storage.setInventoryRecords(prodId, "prodId", id);
-			storage.setInventoryRecords(prodId, "price", price);
-			storage.setInventoryRecords(prodId, "quantity", quantity);
-			storage.setInventoryRecords(prodId, "remaining", remaining);
+			InitDB.addNewProduct(prodId, name);
+			InitDB.setInventoryRecords(prodId, "prodId", id);
+			InitDB.setInventoryRecords(prodId, "price", price);
+			InitDB.setInventoryRecords(prodId, "quantity", quantity);
+			InitDB.setInventoryRecords(prodId, "remaining", remaining);
 		
 			count++;
 		}

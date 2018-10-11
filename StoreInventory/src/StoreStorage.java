@@ -94,6 +94,13 @@ public class StoreStorage {
 		bw.close();
 	}//END
 	
+	/**
+	 * initiates the seeds file
+	 * from a .txt document
+	 * @param count
+	 * @param uploadFile
+	 * @return
+	 */
 	public int initSeedsTextFile(int count, File uploadFile){
 		try{
 			seed = new Scanner(uploadFile);
@@ -121,7 +128,7 @@ public class StoreStorage {
 		}
 		seed.close();
 		return count;
-	}
+	}//end of initSeedsTextFile
 	
-}
+}//end of StoreStorage
 

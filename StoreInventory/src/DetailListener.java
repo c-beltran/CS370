@@ -6,7 +6,9 @@ import java.util.EventListener;
  *detailEventOccurred event
  */
 public interface DetailListener extends EventListener {
+	
 	//received the detailEvent object
 	public void detailEventOccurred(DetailEvent event);
-	}
+	
+}
 
